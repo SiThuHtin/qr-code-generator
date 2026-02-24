@@ -133,8 +133,8 @@ const QrGenerator: React.FC = () => {
             Upload any file (PDF, PPTX, Docs, Images)
           </label>
           <div className="relative flex items-center justify-center w-full mt-2">
-            <label htmlFor="dropzone-file" className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${file ? 'border-green-500 bg-green-50 dark:bg-green-900/20' : 'border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-zinc-800 bg-gray-50 dark:bg-zinc-800'}`}>
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
+            <label htmlFor="dropzone-file" className={`flex flex-col items-center justify-center w-full min-h-[12rem] p-6 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${file ? 'border-green-500 bg-green-50 dark:bg-green-900/20' : 'border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-zinc-800 bg-gray-50 dark:bg-zinc-800'}`}>
+              <div className="flex flex-col items-center justify-center w-full">
                 {file ? (
                   <>
                     <FileCheck className="w-8 h-8 mb-2 text-green-500" />
@@ -143,9 +143,15 @@ const QrGenerator: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    <UploadCloud className="w-8 h-8 mb-2 text-gray-500 dark:text-gray-400" />
-                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 text-center px-4">PDF, PPTX, XLSX, DOCX, PNG, JPEG</p>
+                    <div className="flex gap-3 mb-2">
+                      <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl text-blue-500 dark:text-blue-400 mb-2 mt-2">
+                        <UploadCloud className="w-8 h-8" />
+                      </div>
+                    </div>
+                    <p className="mb-1 text-sm text-gray-600 dark:text-gray-300"><span className="font-semibold text-blue-600 dark:text-blue-400">Click to browse</span> or drag & drop</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500 text-center px-4 max-w-[250px]">
+                      Upload Photos, Presentations, or Documents up to 5MB.
+                    </p>
                   </>
                 )}
               </div>
