@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import { join } from "path";
 import crypto from "crypto";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -35,21 +33,9 @@ export async function POST(request: NextRequest) {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
 
-        // Ensure uploads directory exists /public/uploads
-        const uploadsDir = join(process.cwd(), 'public', 'uploads');
-        try {
-            await mkdir(uploadsDir, { recursive: true });
-        } catch (err) {
-            // directory might already exist, safe to ignore
-        }
-
         // Rename file using UUID
         const fileId = crypto.randomUUID();
         const storedName = `${fileId}.${fileExtension}`;
-        const filepath = join(uploadsDir, storedName);
-
-        // Save the file
-        await writeFile(filepath, buffer);
 
         // Determine Mime Type
         const mimeTypes: Record<string, string> = {
@@ -63,16 +49,36 @@ export async function POST(request: NextRequest) {
         };
         const mimeType = mimeTypes[fileExtension] || "application/octet-stream";
 
-        // Insert metadata into Supabase Database 
         // Using dynamic import of the supabase instance
         const { supabase } = await import("@/utils/supabase");
+
+        // Upload to Supabase Storage Bucket 'uploads'
+        const { error: storageError } = await supabase
+            .storage
+            .from('uploads')
+            .upload(storedName, buffer, {
+                contentType: mimeType,
+                upsert: false
+            });
+
+        if (storageError) {
+            console.error("Storage Upload Error:", storageError);
+            return NextResponse.json({ error: "Failed to upload file to cloud storage" }, { status: 500 });
+        }
+
+        // Insert metadata into Supabase Database 
+
+        // Calculate the expiration time (24 hours from now)
+        const expiresAt = new Date();
+        expiresAt.setHours(expiresAt.getHours() + 24);
 
         const { error: dbError } = await supabase.from('files').insert({
             id: fileId,
             original_name: originalName,
             stored_name: storedName,
             file_size: file.size,
-            mime_type: mimeType
+            mime_type: mimeType,
+            expires_at: expiresAt.toISOString()
         });
 
         if (dbError) {

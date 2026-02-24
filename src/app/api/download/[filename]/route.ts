@@ -1,7 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { readFile } from "fs/promises";
-import { join } from "path";
-import { existsSync } from "fs";
 
 export async function GET(request: NextRequest) {
     try {
@@ -29,10 +26,15 @@ export async function GET(request: NextRequest) {
 
         const resolvedOriginalName = fileData.original_name || storedName;
 
-        const filePath = join(process.cwd(), "public", "uploads", storedName);
+        // Replace checking disk with fetching from Supabase Storage
+        const { data: storageData, error: storageError } = await supabase
+            .storage
+            .from('uploads')
+            .download(storedName);
 
-        if (!existsSync(filePath)) {
-            return NextResponse.json({ error: "File missing from disk" }, { status: 404 });
+        if (storageError || !storageData) {
+            console.error("Storage Download Error:", storageError);
+            return NextResponse.json({ error: "File missing from cloud storage" }, { status: 404 });
         }
 
         // Atomically increment the download count via RPC or direct update
@@ -46,7 +48,7 @@ export async function GET(request: NextRequest) {
             }
         }
 
-        const fileBuffer = await readFile(filePath);
+        const fileBuffer = await storageData.arrayBuffer();
 
         // Set headers to force download with original filename from DB
         const response = new NextResponse(fileBuffer);

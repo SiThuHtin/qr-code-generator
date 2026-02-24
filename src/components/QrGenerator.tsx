@@ -54,13 +54,6 @@ const QrGenerator: React.FC = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Here we optionally console.log the requested JSON format (fileId, originalName, storedName, fileSize):
-        console.log("Upload Success:", {
-          fileId: data.fileId,
-          originalName: data.originalName,
-          storedName: data.storedName,
-          fileSize: data.fileSize,
-        });
         setQrValue(data.url);
       } else {
         setErrorMsg(data.error || 'File upload failed');
