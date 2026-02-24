@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
 
         // Set headers to force download with original filename from DB
         const response = new NextResponse(fileBuffer);
-        response.headers.set("Content-Disposition", `attachment; filename="${resolvedOriginalName}"`);
+        response.headers.set("Content-Disposition", `inline; filename="${resolvedOriginalName}"`);
 
         // Set appropriate content type
         const ext = storedName.split(".").pop()?.toLowerCase();
@@ -63,7 +63,9 @@ export async function GET(request: NextRequest) {
             pptx: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
             png: "image/png",
             jpeg: "image/jpeg",
-            jpg: "image/jpeg"
+            jpg: "image/jpeg",
+            heic: "image/heic",
+            heif: "image/heif"
         };
 
         if (ext && mimeTypes[ext]) {
