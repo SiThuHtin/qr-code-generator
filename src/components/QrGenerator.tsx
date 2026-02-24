@@ -7,7 +7,7 @@ import { UploadCloud, Link as LinkIcon, FileCheck, Loader2, X } from 'lucide-rea
 type Tab = 'text' | 'file';
 
 const QrGenerator: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<Tab>('text');
+  const [activeTab, setActiveTab] = useState<Tab>('file');
   const [inputText, setInputText] = useState<string>('');
   const [file, setFile] = useState<File | null>(null);
   const [qrValue, setQrValue] = useState<string>('');
@@ -95,10 +95,14 @@ const QrGenerator: React.FC = () => {
           <LinkIcon size={16} /> Text / URL
         </button>
         <button
-          className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-md text-sm font-medium transition-all ${activeTab === 'file' ? 'bg-white dark:bg-zinc-700 shadow-sm text-blue-600 dark:text-blue-400' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}`}
+          className={`flex-1 relative flex items-center justify-center gap-2 py-2 px-4 rounded-md text-sm font-medium transition-all ${activeTab === 'file' ? 'bg-white dark:bg-zinc-700 shadow-sm text-blue-600 dark:text-blue-400 font-bold' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}`}
           onClick={() => { setActiveTab('file'); setQrValue(''); setErrorMsg(''); }}
         >
-          <UploadCloud size={16} /> File Upload
+          <UploadCloud size={16} className={activeTab === 'file' ? "text-blue-500" : ""} />
+          File to QR
+          <span className="absolute -top-2.5 -right-1 bg-gradient-to-r from-blue-600 to-indigo-600 animate-pulse text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full shadow-md border border-white dark:border-zinc-800">
+            POPULAR
+          </span>
         </button>
       </div>
 
