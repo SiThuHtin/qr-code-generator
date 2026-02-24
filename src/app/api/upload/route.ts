@@ -86,9 +86,9 @@ export async function POST(request: NextRequest) {
             // Optionally decide if you want to fail the upload, or return warning logic
         }
 
-        // We can also return a full URL for the client to generate the QR easily
+        // We return a URL to the preview page instead of direct download
         const url = new URL(request.url);
-        const fileUrl = `${url.origin}/api/download/${storedName}?originalName=${encodeURIComponent(originalName)}`;
+        const fileUrl = `${url.origin}/p/${storedName}`;
 
         // Return the specific JSON response requested
         return NextResponse.json({
