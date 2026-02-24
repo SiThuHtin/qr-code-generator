@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { QRCodeCanvas as QRCode } from 'qrcode.react';
-import { UploadCloud, Link as LinkIcon, FileCheck, Loader2 } from 'lucide-react';
+import { UploadCloud, Link as LinkIcon, FileCheck, Loader2, X } from 'lucide-react';
 
 type Tab = 'text' | 'file';
 
@@ -178,6 +178,24 @@ const QrGenerator: React.FC = () => {
                   }}
                 />
               </label>
+
+              {file && !isUploading && (
+                <button
+                  className="absolute top-3 right-3 p-1.5 bg-red-100/80 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors z-10"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setFile(null);
+                    setErrorMsg('');
+                    // Also clear value from the file input to allow re-selection of the same file
+                    const fileInput = document.getElementById('dropzone-file') as HTMLInputElement;
+                    if (fileInput) fileInput.value = '';
+                  }}
+                  title="Remove file"
+                >
+                  <X size={16} />
+                </button>
+              )}
             </div>
 
             {errorMsg && <p className="mt-3 text-sm text-red-600 dark:text-red-400">{errorMsg}</p>}
