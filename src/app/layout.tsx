@@ -13,8 +13,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Silly QR | QR Code Generator",
-  description: "Generate and download custom QR codes easily.",
+  title: "Free QR Code Generator",
+  description: "Create Free QR Codes — A simple and fast solution for all your needs. Instantly generate high-quality QR codes for URLs, text, or files up to 10MB. Always free and fast.",
+  applicationName: "Silly QR",
+  keywords: ["Free QR Code Generator", "QR Code Generator", "Silly QR", "File to QR", "Create QR Code"],
+  openGraph: {
+    title: "Free QR Code Generator",
+    description: "Create Free QR Codes — A simple and fast solution for all your needs. Instantly generate high-quality QR codes for URLs, text, or files up to 10MB. Always free and fast.",
+    siteName: "Silly QR",
+    type: "website",
+  }
 };
 
 export default function RootLayout({
