@@ -48,11 +48,13 @@ export async function GET(request: NextRequest) {
             }
         }
 
-        const fileBuffer = await storageData.arrayBuffer();
-
         // Set headers to force download with original filename from DB
+        const fileBuffer = await storageData.arrayBuffer();
         const response = new NextResponse(fileBuffer);
-        response.headers.set("Content-Disposition", `inline; filename="${resolvedOriginalName}"`);
+
+        // Critical Security fix: Sanitize filename to prevent Header Injection
+        const safeOriginalName = resolvedOriginalName.replace(/["\r\n]/g, "");
+        response.headers.set("Content-Disposition", `inline; filename="${safeOriginalName}"`);
 
         // Set appropriate content type
         const ext = storedName.split(".").pop()?.toLowerCase();

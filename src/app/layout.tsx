@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "QR Code Generator",
+  title: "Silly QR | QR Code Generator",
   description: "Generate and download custom QR codes easily.",
 };
 
