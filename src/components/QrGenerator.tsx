@@ -84,7 +84,7 @@ const QrGenerator: React.FC = () => {
 
   return (
     <div className="w-full max-w-md p-8 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl transition-all hover:shadow-blue-500/10 dark:hover:shadow-blue-500/5">
-      <h1 className="text-3xl font-bold mb-6 text-center text-foreground">Silly QR</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center text-foreground">QR Code Generator</h1>
 
       {/* Tabs */}
       <div className="flex bg-gray-100 dark:bg-zinc-800 rounded-lg p-1 mb-6">
