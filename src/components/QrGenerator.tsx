@@ -23,10 +23,10 @@ const QrGenerator: React.FC = () => {
   const handleFileUpload = async () => {
     if (!file) return;
 
-    // Client-side Validation: 5MB
-    const MAX_MB = 5;
+    // Client-side Validation: 10MB
+    const MAX_MB = 10;
     if (file.size > MAX_MB * 1024 * 1024) {
-      setErrorMsg(`File too large! Must be under 5MB (currently ${(file.size / 1024 / 1024).toFixed(2)}MB).`);
+      setErrorMsg(`File too large! Must be under 10MB (currently ${(file.size / 1024 / 1024).toFixed(2)}MB).`);
       return;
     }
 
@@ -150,7 +150,7 @@ const QrGenerator: React.FC = () => {
                     </div>
                     <p className="mb-1 text-sm text-gray-600 dark:text-gray-300"><span className="font-semibold text-blue-600 dark:text-blue-400">Click to browse</span> or drag & drop</p>
                     <p className="text-xs text-gray-400 dark:text-gray-500 text-center px-4 max-w-[250px]">
-                      Upload Photos, Presentations, or Documents up to 5MB.
+                      Upload Photos, Presentations, or Documents up to 10MB.
                     </p>
                   </>
                 )}
@@ -173,9 +173,9 @@ const QrGenerator: React.FC = () => {
                     }
 
                     // Validate file size immediately
-                    const MAX_MB = 5;
+                    const MAX_MB = 10;
                     if (selected.size > MAX_MB * 1024 * 1024) {
-                      setErrorMsg(`File too large! Must be under 5MB (currently ${(selected.size / 1024 / 1024).toFixed(2)}MB).`);
+                      setErrorMsg(`File too large! Must be under 10MB (currently ${(selected.size / 1024 / 1024).toFixed(2)}MB).`);
                       setFile(null);
                       return;
                     }

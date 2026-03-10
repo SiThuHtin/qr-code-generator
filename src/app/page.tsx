@@ -31,7 +31,7 @@ export default function Home() {
             </h1>
 
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto lg:mx-0">
-              Instantly generate high-quality QR codes for your URLs, text, or any file up to 5MB. Simply upload your file, scan the generated code, and access it anywhere.
+              Instantly generate high-quality QR codes for your URLs, text, or any file up to 10MB. Simply upload your file, scan the generated code, and access it anywhere.
             </p>
 
             {/* Features List */}

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
 // Strictly allow only pdf, docx, xlsx, pptx, png, jpeg
 const ALLOWED_EXTENSIONS = ['pdf', 'docx', 'xlsx', 'pptx', 'png', 'jpeg', 'jpg'];
@@ -15,9 +15,9 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
         }
 
-        // Validation: File Size Limit (5MB)
+        // Validation: File Size Limit (10MB)
         if (file.size > MAX_FILE_SIZE) {
-            return NextResponse.json({ error: "File exceeds the 5MB limit" }, { status: 400 });
+            return NextResponse.json({ error: "File exceeds the 10MB limit" }, { status: 400 });
         }
 
         // Validation: File Type Limit
