@@ -34,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        <meta name="google-adsense-account" content="ca-pub-6558195500270519" />
         {process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID && (
           <script
             async
