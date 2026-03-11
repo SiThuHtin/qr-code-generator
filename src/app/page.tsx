@@ -8,11 +8,14 @@ export default function Home() {
       {/* Decorative Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
         <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-blue-400/10 dark:bg-blue-600/10 blur-[120px]" />
-        <div className="absolute top-[60%] -right-[10%] w-[40%] h-[60%] rounded-full bg-indigo-400/10 dark:bg-indigo-600/10 blur-[120px]" />
+        <div className="absolute top-[60%] -right-[10%] w-[40%] h-[60%] rounded-full bg-orange-400/10 dark:bg-orange-600/10 blur-[120px]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 lg:py-24">
-        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24 flex justify-center gap-4 xl:gap-8">
+        
+        {/* Main Content */}
+        <div className="flex-1 max-w-7xl w-full mx-auto">
+          <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
 
           {/* Left Column: Explanations & Hero */}
           <div className="flex-1 text-center lg:text-left animate-in fade-in slide-in-from-bottom-8 duration-700">
@@ -26,7 +29,7 @@ export default function Home() {
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6 leading-tight">
               Create Smart QR Codes <br className="hidden lg:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-orange-500 dark:from-blue-400 dark:to-orange-400">
                 In Seconds.
               </span>
             </h1>
@@ -74,10 +77,21 @@ export default function Home() {
             <QrGenerator />
           </div>
 
+          </div>
+
+          {/* Mobile/Tablet Ad (Shows below content on smaller screens, hidden on desktop) */}
+          <div className="xl:hidden mt-12 w-full">
+            <AdBanner className="w-full" format="auto" />
+          </div>
         </div>
 
-        {/* QR Homepage Ad Unit */}
-        <AdBanner />
+        {/* Right Side Ad (Shows only on desktop) */}
+        <aside className="hidden xl:block w-[160px] 2xl:w-[200px] flex-shrink-0">
+          <div className="sticky top-24">
+            <AdBanner className="w-full" format="vertical" />
+          </div>
+        </aside>
+
       </div>
     </div>
   );
