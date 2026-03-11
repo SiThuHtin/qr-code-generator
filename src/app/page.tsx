@@ -1,5 +1,6 @@
 import QrGenerator from "../components/QrGenerator";
 import { CheckCircle2, ShieldCheck, Zap } from "lucide-react";
+import AdBanner from "../components/AdBanner";
 
 export default function Home() {
   return (
@@ -74,6 +75,9 @@ export default function Home() {
           </div>
 
         </div>
+
+        {/* QR Homepage Ad Unit */}
+        <AdBanner />
       </div>
     </div>
   );
